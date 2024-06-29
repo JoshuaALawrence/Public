@@ -71,13 +71,26 @@ Visit the [Tampermonkey website](https://www.tampermonkey.net/) to download the 
 
 ### Step 1: Find a Userscript
 
-1. Browse [userscript.org](https://www.userscript.org/) or other userscript repositories to find a script you want to install.
+1. Browse [userscript.org](https://www.userscript.org/) or my current repository to find a script you want to install.
 
 ### Step 2: Install the Userscript
 
-1. Click on the **Install** or **Install this script** button on the userscript's page.
-2. Tampermonkey will open with a prompt to install the script.
-3. Review the script permissions and click **Install** to add it.
+#### Automatic
+1. Download the script, it should ask to install automatically
+
+#### Manual
+1. Copy all the code in the script
+2. Click the extension icon
+
+![image](https://github.com/JoshuaALawrence/Public/assets/122106941/b1232341-1bed-460d-9633-9e6600add6fa)
+
+3. Click "Dashboard"
+4. Click the "+"
+
+![image](https://github.com/JoshuaALawrence/Public/assets/122106941/df49372b-7d61-4baa-9001-c9f9b71c5be0)
+
+5. Paste the code and click "Save" or press CTRL+S
+6. You're done
 
 ### Step 3: Manage Userscripts
 
