@@ -30,3 +30,53 @@ This will automatically pull data from the GDCO backend and display it when sele
 This section is all the scripts I created for ZT Systems technician usage.
 
 Currently Inactive.
+
+# How to Install Scripts
+## Installing Tampermonkey
+
+### Step 1: Go to the Tampermonkey Website
+
+Visit the [Tampermonkey website](https://www.tampermonkey.net/) to download the extension.
+
+### Step 2: Choose Your Browser
+
+- Click on the **Download** button.
+- Select your browser (e.g., Chrome, Firefox, Safari, Edge).
+
+### Step 3: Install Tampermonkey
+
+#### For Google Chrome
+
+1. Download Tampermonkey from [Tampermonkey Chrome Web Store page](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo).
+2. Click on the **Add to Chrome** button.
+3. Confirm any prompts to add the extension to Chrome.
+4. Tampermonkey should now appear in the Chrome toolbar as a new icon.
+
+#### For Mozilla Firefox
+
+1. Download Tampermonkey from [Tampermonkey Firefox Add-ons page](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/).
+2. Click on the **Add to Firefox** button.
+3. Confirm any prompts to add the extension to Firefox.
+4. Tampermonkey should now appear in the Firefox toolbar as a new icon.
+
+
+
+
+
+## Installing Userscripts into Tampermonkey
+
+### Step 1: Find a Userscript
+
+1. Browse [userscript.org](https://www.userscript.org/) or other userscript repositories to find a script you want to install.
+
+### Step 2: Install the Userscript
+
+1. Click on the **Install** or **Install this script** button on the userscript's page.
+2. Tampermonkey will open with a prompt to install the script.
+3. Review the script permissions and click **Install** to add it.
+
+### Step 3: Manage Userscripts
+
+1. Click on the Tampermonkey icon in your browser toolbar.
+2. Select **Dashboard** from the dropdown menu.
+3. Here, you can manage installed userscripts, enable/disable them, and adjust settings.
