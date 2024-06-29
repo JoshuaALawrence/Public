@@ -2,6 +2,12 @@
 
 Welcome to my public repository! This repository is designed to serve as a central hub for my public projects, documentation, and resources. 
 
+## Table of Contents
+
+- [Installing Scripts](#how-to-install-scripts)
+- [Microsoft](#microsoft)
+
+  
 ## Microsoft
 This section is all the scripts I created for Microsoft technician usage.
 #### Current Scripts
