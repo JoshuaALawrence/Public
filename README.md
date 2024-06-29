@@ -31,8 +31,10 @@ This section is all the scripts I created for ZT Systems technician usage.
 
 Currently Inactive.
 
+---
+
 # How to Install Scripts
-## Installing Tampermonkey
+### Installing Tampermonkey
 
 ### Step 1: Go to the Tampermonkey Website
 
@@ -59,11 +61,7 @@ Visit the [Tampermonkey website](https://www.tampermonkey.net/) to download the 
 3. Confirm any prompts to add the extension to Firefox.
 4. Tampermonkey should now appear in the Firefox toolbar as a new icon.
 
-
-
-
-
-## Installing Userscripts into Tampermonkey
+### Installing Userscripts into Tampermonkey
 
 ### Step 1: Find a Userscript
 
