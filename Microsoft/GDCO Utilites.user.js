@@ -4,6 +4,8 @@
 // @description  Utilities that help day-to-day operation.
 // @author       Joshua Lawrence - ZT Systems - v-jolawrence@microsoft.com
 // @match        https://gdcoapp.trafficmanager.net/tasks/details/*
+// @updateURL    https://github.com/JoshuaALawrence/Public/raw/main/Microsoft/GDCO%20Utilites.user.js
+// @downloadURL  https://github.com/JoshuaALawrence/Public/raw/main/Microsoft/GDCO%20Utilites.user.js
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
@@ -86,7 +88,7 @@
             const windowTitle = document.title;
             const targetElement = event.target;
             const highlightedText = selection.toString().trim();
-            const nameMatches = highlightedText.match(/(DS?M\d+\w*-\d+-\d+-\d+\w+\d*|\w+\d+\.ds?m\d+|ds?m\d+-\d+-\d+x?omt)/gi);
+            const nameMatches = highlightedText.match(/(DS?M\d+[a-zA-Z\d]*-\d+-\d+-\d+[a-zA-Z\d]+\d*|[a-zA-Z\d]+\d+\.ds?m\d+|ds?m\d+-\d+-\d+x?omt)/gi);
             let data = null;
     
             // If a popup already exists, do not open another one
