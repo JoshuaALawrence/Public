@@ -12,7 +12,7 @@
 (function() {
     'use strict';
 
-    // This variable stops duplicate searches
+    // This variable stops duplicate searches until the API calls back
     let Searching = false;
 
     // Add the style for the popup to the document
