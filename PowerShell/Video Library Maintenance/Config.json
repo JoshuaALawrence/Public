@@ -1,0 +1,47 @@
+{
+    "Documentation": [
+        "Delete Short",
+        "Min Length: M [Minutes] H [Hours]",
+        "Example: 10M (10 Minutes)",
+        "Example: 5H (5 Hours)",
+	"",
+        "MaxSize",
+        "Maximum amount of movies before deletion starts",
+	"",
+        "DeleteMethod",
+        "Oldest - Delete the oldest first",
+        "Newest - Delete the newest first",
+	"",
+        "IgnoredVideos",
+        "Videos that won't be deleted from the script. (Case insensitive)",
+	"This uses powershell regex so any titles containing the string won't be removed.",
+	"Use * for anything after or before a string.",
+	"",
+	"IgnoreIfFiles",
+	"If any of the video directories contains this file (case sensitive), don't remove it.",
+	"",
+        "Log-Output",
+        "Output any logs like deletes, errors etc.",
+	"",
+        "ContentDirectory",
+	"The directory of your video folders."
+    ],
+    "MaxSize": "1200",
+    "DeleteMethod": "Oldest",
+    "DeleteShort": {
+        "Enabled": "true",
+        "MinimumLength": "10M"
+    },
+    "IgnoredVideos": [
+	"Grandmas Birth*",
+	"Halloween"
+    ],
+    "IgnoreIfFiles": [
+	""
+    ],
+    "Logging": {
+	"Enabled": "true",
+	"Path": ".\\Output.log"
+    },
+    "ContentDirectory": "C:\\path\\example\\"
+}
