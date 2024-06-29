@@ -4,7 +4,7 @@ Welcome to my public repository! This repository is designed to serve as a centr
 
 ## Table of Contents
 
-- [Installing Scripts](#how-to-install-scripts)
+- [How to Install Scripts](#how-to-install-scripts)
 - [Microsoft](#microsoft)
 
   
