@@ -11,7 +11,11 @@
 
 (function() {
     'use strict';
+
+    // This variable stops duplicate searches
     let Searching = false;
+
+    // Add the style for the popup to the document
     const popupStyle = document.createElement('style');
     popupStyle.textContent = `
         .popup-container {
@@ -40,6 +44,7 @@
     `;
     document.head.appendChild(popupStyle);
 
+    // Show the popup with the data attached
     function showPopup(dataArrays, mouseX, mouseY) {
         const popupContainer = document.createElement('div');
         popupContainer.className = 'popup-container';
@@ -82,13 +87,17 @@
         });
     }
     
+    // Add a listener to check when the user stops clicking
     document.addEventListener('mouseup', async function(event) {
         const selection = window.getSelection();
         if (selection && selection.toString() !== '' && !Searching) {
             const windowTitle = document.title;
             const targetElement = event.target;
             const highlightedText = selection.toString().trim();
+
+            // This is the regex to match all the different names I'm currently aware of
             const nameMatches = highlightedText.match(/(DS?M\d+[a-zA-Z\d]*-\d+-\d+-\d+[a-zA-Z\d]+\d*|[a-zA-Z\d]+\d+\.ds?m\d+|ds?m\d+-\d+-\d+x?omt)/gi);
+            
             let data = null;
     
             // If a popup already exists, do not open another one
@@ -111,7 +120,7 @@
             // Search based on Name matches
             if (nameMatches && nameMatches.length > 0) {
                 for (const nameMatch of nameMatches) {
-                    data = await search("(Name eq '" + nameMatch + "')");
+                    data = await searchInventory("(Name eq '" + nameMatch + "')");
                     if (data && data.value?.length > 0) {
                         // Add unique entries based on 'Name' field
                         data.value.forEach(item => {
@@ -123,7 +132,7 @@
                 }
             } else if (targetElement.classList.contains('divided-item') && targetElement.innerHTML.match(/Tag/)) {
                 // Search based on AssetTag if no Name matches found
-                data = await search("(search.in(AssetTag,'" + highlightedText + "'))");
+                data = await searchInventory("(search.in(AssetTag,'" + highlightedText + "'))");
                 if (data && data.value?.length > 0) {
                     uniqueData = data.value;
                 }
@@ -149,6 +158,7 @@
         }
     });
     
+    // Look in the local storage for data using regex
     function searchLocalStorageByRegex(regex) {
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
@@ -159,13 +169,15 @@
         return null;
     }
 
+    // Grab the microsoft security access token if you're logged in
     function getToken() {
         const regex = /authority.*?microsoftonline\.com\/microsoft\.onmicrosoft.com.*?https\:\/\/mcio\.microsoft\.com\/gdcoservice\/\.default/; // Regular expression to match the key
         const value = JSON.parse(searchLocalStorageByRegex(regex)).accessToken;
         return value;
     }
 
-    function search(filter = "", search = "") {
+    // Run a search on the backend inventory api
+    function searchInventory(filter = "", search = "") {
         return new Promise((resolve, reject) => {
             const Token = getToken();
             if (Token) {
