@@ -82,9 +82,6 @@ Usage
                   VideoDir2 > VideoDir2.mov
  
 # How To Run/Execute
-Enable script execution (PowerShell).
-
-    Set-ExecutionPolicy Unrestricted
 Run in PowerShell:
 
-    .\"Start Maintenance.ps1"
+    powershell -ExecutionPolicy Bypass -File "Start Maintenance.ps1"
