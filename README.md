@@ -2,6 +2,7 @@
 
 Welcome to my public repository! This repository is designed to serve as a central hub for my public projects, documentation, and resources. 
 
+Use URL https://www.lawrence.zip/Public to share this repo!
 ## Table of Contents
 
 - [How to Install Scripts](#how-to-install-scripts)
