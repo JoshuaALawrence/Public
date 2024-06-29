@@ -1,4 +1,4 @@
-# Video Content Maintainer
+# Video Library Maintenance
 
 <b>Use with caution, any and all misuse is your responsibility. Always backup files before running a destructive program such as this. This is just a fun side project.</b>
 
