@@ -23,7 +23,8 @@
     let scrollTimeout = 60000; // 60 seconds
     let scrollTimer;
     let foundMessage = false;
-
+    let deletedMessages = 0;
+    
     function triggerRightClick(element) {
         let event = new MouseEvent('contextmenu', {
             bubbles: true,
@@ -93,10 +94,10 @@
                 if (scrollTimer) clearTimeout(scrollTimer);
             }
 
-            let deletedMessages = 0;
+            
             for (let message of messages) {
                 if (!isRunning) break;
-                if (deletedMessages % 10 == 0) {
+                if (deletedMessages % 10 == 0 && deletedMessages > 0) {
                     showMessage("Waiting 10 seconds to avoid throttling.");
                     await new Promise(resolve => setTimeout(resolve, 1000));
                     for(let i = 10; i>0;i--) {
