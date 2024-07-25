@@ -8,6 +8,10 @@
 // 4. Select the channel you want to delete in
 // 5. Paste the script into the console and wait
 
+// NOTE: 
+// IF IT LAGS, OR IT DOES NOT DELETE THE MESSAGE BUT OPENS THE MENU
+// RAISE THE WAIT TIME BETWEEN RIGHT CLICK AND DELETE
+
 // Use the name it shows for your personal profile
 // if it has (EXT) keep it in the display name.
 const Name = "DISPLAY NAME HERE";
