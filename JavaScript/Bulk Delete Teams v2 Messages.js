@@ -1,3 +1,15 @@
+// This script deletes all messages from the user
+// in the current chat, and scrolls up automatically.
+
+// HOW-TO:
+// 1. Open https://teams.microsoft.com/
+// 2. Open dev settings (f12/ctrl+shift+i)
+// 3. If it asks you to, type 'allow pasting'
+// 4. Select the channel you want to delete in
+// 5. Paste the script into the console and wait
+
+// Use the name it shows for your personal profile
+// if it has (EXT) keep it in the display name.
 const Name = "DISPLAY NAME HERE";
 
 function triggerRightClick(element) {
