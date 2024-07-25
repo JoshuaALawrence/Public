@@ -15,14 +15,14 @@
     // HOW-TO:
     // Start: Hold Delete for 5 Seconds
     // Stop: Hold Delete for 5 Seconds
-  
-    let Name = "DISPLAY-NAME"
+
+    let Name = ""
     let isRunning = false;
     let deleteKeyTimer;
     let deleteKeyHoldTime = 5000; // 5 seconds
-    let scrollTimeout = 120000; // 60 seconds
+    let scrollTimeout = 60000; // 60 seconds
     let scrollTimer;
-    let firstLoad = true;
+    let foundMessage = false;
 
     function triggerRightClick(element) {
         let event = new MouseEvent('contextmenu', {
@@ -34,7 +34,9 @@
     }
 
     function showMessage(message) {
+        if (document.getElementById("AlertBox")) { document.getElementById("AlertBox").remove() }
         let messageBox = document.createElement('div');
+        messageBox.id = "AlertBox"
         messageBox.textContent = message;
         messageBox.style.position = 'fixed';
         messageBox.style.bottom = '20px';
@@ -45,8 +47,11 @@
         messageBox.style.borderRadius = '5px';
         messageBox.style.zIndex = '10000';
         document.body.appendChild(messageBox);
+
         setTimeout(() => {
-            messageBox.remove();
+            if (messageBox) {
+                messageBox.remove();
+            }
         }, 5000);
     }
 
@@ -58,14 +63,20 @@
                     return authorElement && authorElement.textContent.includes(Name);
                 })
                 .reverse();
+
             if (messages.length === 0) {
-                if (!firstLoad) {
-                    showMessage("No messages, waiting 30 seconds before scrolling due to Microsoft rate limiting.");
-                    await new Promise(resolve => setTimeout(resolve, 30000));
+                if (foundMessage) {
+                    showMessage("No messages, waiting 15 seconds before scrolling due to Microsoft rate limiting.");
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    for(let i = 15; i>0;i--) {
+                        showMessage(`Waiting ${i} more second(s) before scrolling`);
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                    }
                 } else {
-                    showMessage("Looking for initial messages..");
-                    firstLoad = false;
+                    showMessage("Looking for messages..");
+                    await new Promise(resolve => setTimeout(resolve, 1000));
                 }
+                foundMessage = false;
                 let topmostMessage = document.querySelector('div[data-tid="chat-pane-item"]');
                 if (topmostMessage) {
                     topmostMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -74,13 +85,18 @@
                     stopScript();
                     break;
                 }
+
                 await new Promise(resolve => setTimeout(resolve, 500));
+
+                // Start scroll timeout to stop script if no new messages load
+
                 scrollTimer = setTimeout(() => {
                     showMessage("No new messages after 60 seconds, stopping script.");
                     stopScript();
                 }, scrollTimeout);
+
                 continue;
-            } else {
+            }else{
                 if (scrollTimer) clearTimeout(scrollTimer);
             }
 
@@ -94,6 +110,7 @@
                 let deleteOption = document.querySelector('div[role="menuitem"][aria-label="Delete this message"]');
                 if (deleteOption) {
                     deleteOption.click();
+                    foundMessage = true
                     await new Promise(resolve => setTimeout(resolve, 300));
                 } else {
                     console.error("Delete option not found.");
