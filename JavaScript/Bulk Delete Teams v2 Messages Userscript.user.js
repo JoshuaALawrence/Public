@@ -68,12 +68,13 @@
                     break;
                 }
                 await new Promise(resolve => setTimeout(resolve, 500));
-                if (scrollTimer) clearTimeout(scrollTimer);
                 scrollTimer = setTimeout(() => {
                     showMessage("No new messages after 60 seconds, stopping script.");
                     stopScript();
                 }, scrollTimeout);
                 continue;
+            } else {
+                if (scrollTimer) clearTimeout(scrollTimer);
             }
 
             for (let message of messages) {
