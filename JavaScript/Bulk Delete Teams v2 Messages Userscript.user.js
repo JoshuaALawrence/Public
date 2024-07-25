@@ -20,8 +20,6 @@
     let isRunning = false;
     let deleteKeyTimer;
     let deleteKeyHoldTime = 5000;
-    let scrollTimeout = 60000;
-    let scrollTimer;
     let foundMessage = false;
     let deletedMessages = 0;
 
@@ -65,14 +63,13 @@
             .reverse();
             if (messages.length === 0) {
                 if (foundMessage) {
-                    if (scrollTimer) clearTimeout(scrollTimer);
                     showMessage("No messages, waiting 15 seconds before scrolling due to Microsoft rate limiting.");
                     await new Promise(resolve => setTimeout(resolve, 1000));
                     for(let i = 15; i>0;i--) {
                         showMessage(`Waiting ${i} more second(s) before scrolling`);
                         await new Promise(resolve => setTimeout(resolve, 1000));
                     }
-                    showMessage(`Continuing..`);
+                    showMessage(`Continuing`);
                 } else {
                     showMessage("Looking for messages..");
                     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -87,24 +84,18 @@
                     break;
                 }
                 await new Promise(resolve => setTimeout(resolve, 500));
-                scrollTimer = setTimeout(() => {
-                    showMessage("No new messages after 120 seconds, stopping script.");
-                    stopScript();
-                }, scrollTimeout);
                 continue;
-            }else{
-                if (scrollTimer) clearTimeout(scrollTimer);
             }
 
 
             for (let message of messages) {
                 if (!isRunning) break;
                 if (deletedMessages % 10 == 0 && deletedMessages > 0) {
-                    if (scrollTimer) clearTimeout(scrollTimer);
                     for(let i = 10; i>0;i--) {
                         showMessage(`Waiting ${i} second(s) before scrolling to avoid throttling`);
                         await new Promise(resolve => setTimeout(resolve, 1000));
                     }
+                    showMessage(`Continuing`);
                 }
                 message.scrollIntoView({ behavior: 'auto', block: 'center' });
                 await new Promise(resolve => setTimeout(resolve, 200));
