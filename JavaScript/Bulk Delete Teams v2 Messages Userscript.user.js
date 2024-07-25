@@ -16,7 +16,7 @@
     // Start: Hold Delete for 5 Seconds
     // Stop: Hold Delete for 5 Seconds
 
-    let Name = ""
+    let Name = "Joshua Lawrence (EXT)"
     let isRunning = false;
     let deleteKeyTimer;
     let deleteKeyHoldTime = 5000; // 5 seconds
@@ -47,7 +47,6 @@
         messageBox.style.borderRadius = '5px';
         messageBox.style.zIndex = '10000';
         document.body.appendChild(messageBox);
-
         setTimeout(() => {
             if (messageBox) {
                 messageBox.remove();
@@ -58,12 +57,11 @@
     async function deleteMessages() {
         while (isRunning) {
             let messages = Array.from(document.querySelectorAll('div[data-tid="chat-pane-item"]'))
-                .filter(message => {
-                    let authorElement = message.querySelector('span[data-tid="message-author-name"]');
-                    return authorElement && authorElement.textContent.includes(Name);
-                })
-                .reverse();
-
+            .filter(message => {
+                let authorElement = message.querySelector('span[data-tid="message-author-name"]');
+                return authorElement && authorElement.textContent.includes(Name);
+            })
+            .reverse();
             if (messages.length === 0) {
                 if (foundMessage) {
                     showMessage("No messages, waiting 15 seconds before scrolling due to Microsoft rate limiting.");
@@ -85,16 +83,11 @@
                     stopScript();
                     break;
                 }
-
                 await new Promise(resolve => setTimeout(resolve, 500));
-
-                // Start scroll timeout to stop script if no new messages load
-
                 scrollTimer = setTimeout(() => {
                     showMessage("No new messages after 60 seconds, stopping script.");
                     stopScript();
                 }, scrollTimeout);
-
                 continue;
             }else{
                 if (scrollTimer) clearTimeout(scrollTimer);
@@ -103,26 +96,21 @@
             let deletedMessages = 0;
             for (let message of messages) {
                 if (!isRunning) break;
-
+                if (deletedMessages % 10 == 0) {
+                    showMessage("Waiting 10 seconds to avoid throttling.");
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    for(let i = 10; i>0;i--) {
+                        showMessage(`Waiting ${i} more second(s) before scrolling to avoid throttling`);
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                    }
+                }
                 message.scrollIntoView({ behavior: 'auto', block: 'center' });
-
                 await new Promise(resolve => setTimeout(resolve, 200));
-
                 let messageBody = message.querySelector('div[data-tid="chat-pane-message"]');
                 triggerRightClick(messageBody);
-
                 await new Promise(resolve => setTimeout(resolve, 300));
-
                 let deleteOption = document.querySelector('div[role="menuitem"][aria-label="Delete this message"]');
                 if (deleteOption) {
-                    if (deletedMessages % 10 == 0) {
-                        showMessage("Waiting 10 seconds to avoid throttling.");
-                        await new Promise(resolve => setTimeout(resolve, 1000));
-                        for(let i = 10; i>0;i--) {
-                            showMessage(`Waiting ${i} more second(s) before scrolling`);
-                            await new Promise(resolve => setTimeout(resolve, 1000));
-                        }
-                    }
                     deleteOption.click();
                     deletedMessages++;
                     foundMessage = true
@@ -165,12 +153,10 @@
             }
         }
     });
-
     document.addEventListener('keyup', function(e) {
         if (e.key === 'Delete') {
             clearTimeout(deleteKeyTimer);
             deleteKeyTimer = null;
         }
     });
-
 })();
