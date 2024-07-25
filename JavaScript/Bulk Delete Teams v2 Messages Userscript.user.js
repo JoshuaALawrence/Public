@@ -111,7 +111,7 @@
                         totalWipedMessages++;
                         deletedMessages++;
                         foundMessage = true
-                        showMessage(`Deleted ${totalWipedMessages} total messages.`);
+                        showMessage(`Deleted ${totalWipedMessages} total message(s).`);
                         await new Promise(resolve => setTimeout(resolve, 300));
                     } else {
                         console.error("Delete option not found.");
