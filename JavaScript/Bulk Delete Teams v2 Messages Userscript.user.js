@@ -16,7 +16,7 @@
     // Start: Hold Delete for 5 Seconds
     // Stop: Hold Delete for 5 Seconds
 
-    let Name = ""
+    let Name = "Joshua Lawrence (EXT)"
     let isRunning = false;
     let deleteKeyTimer;
     let deleteKeyHoldTime = 5000;
@@ -69,8 +69,10 @@
                     await new Promise(resolve => setTimeout(resolve, 1000));
                     for(let i = 15; i>0;i--) {
                         showMessage(`Waiting ${i} more second(s) before scrolling`);
+                        document.title = "Waiting ${i} Second(s)"
                         await new Promise(resolve => setTimeout(resolve, 1000));
                     }
+                    document.title = `Teams | Cleaned ${totalWipedMessages} Messages`
                     showMessage(`Continuing`);
                 } else {
                     showMessage("Looking for messages..");
@@ -95,9 +97,11 @@
                 if (deletedMessages % 10 == 0 && deletedMessages > 0) {
                     for(let i = 10; i>0;i--) {
                         showMessage(`Waiting ${i} second(s) before scrolling to avoid throttling`);
+                        document.title = "Waiting ${i} Second(s)"
                         await new Promise(resolve => setTimeout(resolve, 1000));
                         deletedMessages = 0;
                     }
+                    document.title = `Teams | Cleaned ${totalWipedMessages} Messages`
                     showMessage(`Continuing`);
                 }
                 message.scrollIntoView({ behavior: 'auto', block: 'center' });
