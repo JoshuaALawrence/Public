@@ -72,6 +72,7 @@
                         showMessage(`Waiting ${i} more second(s) before scrolling`);
                         await new Promise(resolve => setTimeout(resolve, 1000));
                     }
+                    showMessage(`Continuing..`);
                 } else {
                     showMessage("Looking for messages..");
                     await new Promise(resolve => setTimeout(resolve, 1000));
