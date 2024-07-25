@@ -23,6 +23,7 @@
     let foundMessage = false;
     let totalWipedMessages = 0;
     let deletedMessages = 0;
+    let oldWindowTitle = document.title;
 
     function triggerRightClick(element) {
         let event = new MouseEvent('contextmenu', {
@@ -112,6 +113,7 @@
                         deletedMessages++;
                         foundMessage = true
                         showMessage(`Deleted ${totalWipedMessages} total message(s).`);
+                        document.title = `Teams | Cleaned ${totalWipedMessages} Messages`
                         await new Promise(resolve => setTimeout(resolve, 300));
                     } else {
                         console.error("Delete option not found.");
@@ -134,6 +136,7 @@
         if (isRunning) {
             isRunning = false;
             showMessage("Script stopped.");
+            document.title = oldWindowTitle;
         }
     }
 
