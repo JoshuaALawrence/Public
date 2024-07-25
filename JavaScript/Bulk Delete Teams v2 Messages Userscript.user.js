@@ -87,7 +87,6 @@
                 continue;
             }
 
-
             for (let message of messages) {
                 if (!isRunning) break;
                 if (deletedMessages % 10 == 0 && deletedMessages > 0) {
