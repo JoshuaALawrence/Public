@@ -16,7 +16,7 @@
     // Start: Hold Delete for 5 Seconds
     // Stop: Hold Delete for 5 Seconds
 
-    let Name = "Joshua Lawrence (EXT)"
+    let Name = ""
     let isRunning = false;
     let deleteKeyTimer;
     let deleteKeyHoldTime = 5000;
@@ -101,16 +101,18 @@
                 message.scrollIntoView({ behavior: 'auto', block: 'center' });
                 await new Promise(resolve => setTimeout(resolve, 200));
                 let messageBody = message.querySelector('div[data-tid="chat-pane-message"]');
-                triggerRightClick(messageBody);
-                await new Promise(resolve => setTimeout(resolve, 300));
-                let deleteOption = document.querySelector('div[role="menuitem"][aria-label="Delete this message"]');
-                if (deleteOption) {
-                    deleteOption.click();
-                    deletedMessages++;
-                    foundMessage = true
+                if (messageBody) {
+                    triggerRightClick(messageBody);
                     await new Promise(resolve => setTimeout(resolve, 300));
-                } else {
-                    console.error("Delete option not found.");
+                    let deleteOption = document.querySelector('div[role="menuitem"][aria-label="Delete this message"]');
+                    if (deleteOption) {
+                        deleteOption.click();
+                        deletedMessages++;
+                        foundMessage = true
+                        await new Promise(resolve => setTimeout(resolve, 300));
+                    } else {
+                        console.error("Delete option not found.");
+                    }
                 }
             }
         }
