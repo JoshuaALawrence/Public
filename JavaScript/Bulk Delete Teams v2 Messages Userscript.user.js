@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      2024-07-25
 // @description  Hold 'Delete' for 5 seconds to remove all messages by you in the chat.
-// @author       You
+// @author       Joshua Lawrence
 // @match        https://teams.microsoft.com/v2/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=microsoft.com
 // @grant        none
