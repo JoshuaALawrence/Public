@@ -22,6 +22,7 @@
     let deleteKeyHoldTime = 5000; // 5 seconds
     let scrollTimeout = 120000; // 60 seconds
     let scrollTimer;
+    let firstLoad = false;
 
     function triggerRightClick(element) {
         let event = new MouseEvent('contextmenu', {
@@ -58,8 +59,13 @@
                 })
                 .reverse();
             if (messages.length === 0) {
-                showMessage("No messages, waiting 30 seconds before scrolling due to Microsoft rate limiting.");
-                await new Promise(resolve => setTimeout(resolve, 30000));
+                if (!firstLoad) {
+                    showMessage("No messages, waiting 30 seconds before scrolling due to Microsoft rate limiting.");
+                    await new Promise(resolve => setTimeout(resolve, 30000));
+                } else {
+                    showMessage("Looking for initial messages..");
+                    firstLoad = false;
+                }
                 let topmostMessage = document.querySelector('div[data-tid="chat-pane-item"]');
                 if (topmostMessage) {
                     topmostMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
