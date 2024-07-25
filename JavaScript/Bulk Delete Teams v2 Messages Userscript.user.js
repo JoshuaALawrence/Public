@@ -83,7 +83,7 @@
                 if (deletedMessages % 10 == 0 && deletedMessages > 0) {
                     for(let i = 10; i>0;i--) {
                         showMessage(`Waiting ${i} second(s) before scrolling to avoid throttling`);
-                        document.title = "Waiting ${i} Second(s)"
+                        document.title = `Waiting ${i} Second(s)`
                         await new Promise(resolve => setTimeout(resolve, 1000));
                         deletedMessages = 0;
                     }
