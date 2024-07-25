@@ -44,7 +44,6 @@
         messageBox.style.borderRadius = '5px';
         messageBox.style.zIndex = '10000';
         document.body.appendChild(messageBox);
-
         setTimeout(() => {
             messageBox.remove();
         }, 5000);
@@ -58,10 +57,8 @@
                     return authorElement && authorElement.textContent.includes(Name);
                 })
                 .reverse();
-
             if (messages.length === 0) {
                 showMessage("No more messages found, scrolling to the topmost message to load more...");
-
                 let topmostMessage = document.querySelector('div[data-tid="chat-pane-item"]');
                 if (topmostMessage) {
                     topmostMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -70,31 +67,22 @@
                     stopScript();
                     break;
                 }
-
                 await new Promise(resolve => setTimeout(resolve, 500));
-
-                // Start scroll timeout to stop script if no new messages load
                 if (scrollTimer) clearTimeout(scrollTimer);
                 scrollTimer = setTimeout(() => {
                     showMessage("No new messages after 60 seconds, stopping script.");
                     stopScript();
                 }, scrollTimeout);
-
                 continue;
             }
 
             for (let message of messages) {
                 if (!isRunning) break;
-
                 message.scrollIntoView({ behavior: 'auto', block: 'center' });
-
                 await new Promise(resolve => setTimeout(resolve, 200));
-
                 let messageBody = message.querySelector('div[data-tid="chat-pane-message"]');
                 triggerRightClick(messageBody);
-
                 await new Promise(resolve => setTimeout(resolve, 300));
-
                 let deleteOption = document.querySelector('div[role="menuitem"][aria-label="Delete this message"]');
                 if (deleteOption) {
                     deleteOption.click();
