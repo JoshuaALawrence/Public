@@ -20,7 +20,7 @@
     let isRunning = false;
     let deleteKeyTimer;
     let deleteKeyHoldTime = 5000; // 5 seconds
-    let scrollTimeout = 60000; // 60 seconds
+    let scrollTimeout = 120000; // 60 seconds
     let scrollTimer;
 
     function triggerRightClick(element) {
@@ -58,7 +58,8 @@
                 })
                 .reverse();
             if (messages.length === 0) {
-                showMessage("No more messages found, scrolling to the topmost message to load more...");
+                showMessage("No messages, waiting 30 seconds before scrolling due to Microsoft rate limiting.");
+                await new Promise(resolve => setTimeout(resolve, 30000));
                 let topmostMessage = document.querySelector('div[data-tid="chat-pane-item"]');
                 if (topmostMessage) {
                     topmostMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
