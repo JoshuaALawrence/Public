@@ -100,16 +100,31 @@
                 if (scrollTimer) clearTimeout(scrollTimer);
             }
 
+            let deletedMessages = 0;
             for (let message of messages) {
                 if (!isRunning) break;
+
                 message.scrollIntoView({ behavior: 'auto', block: 'center' });
+
                 await new Promise(resolve => setTimeout(resolve, 200));
+
                 let messageBody = message.querySelector('div[data-tid="chat-pane-message"]');
                 triggerRightClick(messageBody);
+
                 await new Promise(resolve => setTimeout(resolve, 300));
+
                 let deleteOption = document.querySelector('div[role="menuitem"][aria-label="Delete this message"]');
                 if (deleteOption) {
+                    if (deletedMessages % 10 == 0) {
+                        showMessage("Waiting 10 seconds to avoid throttling.");
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                        for(let i = 10; i>0;i--) {
+                            showMessage(`Waiting ${i} more second(s) before scrolling`);
+                            await new Promise(resolve => setTimeout(resolve, 1000));
+                        }
+                    }
                     deleteOption.click();
+                    deletedMessages++;
                     foundMessage = true
                     await new Promise(resolve => setTimeout(resolve, 300));
                 } else {
