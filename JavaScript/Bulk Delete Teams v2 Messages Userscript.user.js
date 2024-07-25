@@ -19,8 +19,8 @@
     let Name = ""
     let isRunning = false;
     let deleteKeyTimer;
-    let deleteKeyHoldTime = 5000; // 5 seconds
-    let scrollTimeout = 60000; // 60 seconds
+    let deleteKeyHoldTime = 5000;
+    let scrollTimeout = 60000;
     let scrollTimer;
     let foundMessage = false;
     let deletedMessages = 0;
