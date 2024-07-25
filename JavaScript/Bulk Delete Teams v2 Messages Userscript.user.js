@@ -16,7 +16,7 @@
     // Start: Hold Delete for 5 Seconds
     // Stop: Hold Delete for 5 Seconds
 
-    let Name = ""
+    let Name = "Joshua Lawrence (EXT)"
     let isRunning = false;
     let deleteKeyTimer;
     let deleteKeyHoldTime = 5000;
@@ -87,12 +87,14 @@
                 continue;
             }
 
+
             for (let message of messages) {
                 if (!isRunning) break;
                 if (deletedMessages % 10 == 0 && deletedMessages > 0) {
                     for(let i = 10; i>0;i--) {
                         showMessage(`Waiting ${i} second(s) before scrolling to avoid throttling`);
                         await new Promise(resolve => setTimeout(resolve, 1000));
+                        deletedMessages = 0;
                     }
                     showMessage(`Continuing`);
                 }
