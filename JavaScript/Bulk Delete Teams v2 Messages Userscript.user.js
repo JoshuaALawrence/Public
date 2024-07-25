@@ -16,7 +16,7 @@
     // Start: Hold Delete for 5 Seconds
     // Stop: Hold Delete for 5 Seconds
 
-    let Name = "Joshua Lawrence (EXT)"
+    let Name = ""
     let isRunning = false;
     let deleteKeyTimer;
     let deleteKeyHoldTime = 5000;
