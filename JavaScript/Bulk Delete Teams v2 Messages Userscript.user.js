@@ -24,7 +24,7 @@
     let scrollTimer;
     let foundMessage = false;
     let deletedMessages = 0;
-    
+
     function triggerRightClick(element) {
         let event = new MouseEvent('contextmenu', {
             bubbles: true,
@@ -65,6 +65,7 @@
             .reverse();
             if (messages.length === 0) {
                 if (foundMessage) {
+                    if (scrollTimer) clearTimeout(scrollTimer);
                     showMessage("No messages, waiting 15 seconds before scrolling due to Microsoft rate limiting.");
                     await new Promise(resolve => setTimeout(resolve, 1000));
                     for(let i = 15; i>0;i--) {
@@ -86,7 +87,7 @@
                 }
                 await new Promise(resolve => setTimeout(resolve, 500));
                 scrollTimer = setTimeout(() => {
-                    showMessage("No new messages after 60 seconds, stopping script.");
+                    showMessage("No new messages after 120 seconds, stopping script.");
                     stopScript();
                 }, scrollTimeout);
                 continue;
@@ -94,14 +95,13 @@
                 if (scrollTimer) clearTimeout(scrollTimer);
             }
 
-            
+
             for (let message of messages) {
                 if (!isRunning) break;
                 if (deletedMessages % 10 == 0 && deletedMessages > 0) {
-                    showMessage("Waiting 10 seconds to avoid throttling.");
-                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    if (scrollTimer) clearTimeout(scrollTimer);
                     for(let i = 10; i>0;i--) {
-                        showMessage(`Waiting ${i} more second(s) before scrolling to avoid throttling`);
+                        showMessage(`Waiting ${i} second(s) before scrolling to avoid throttling`);
                         await new Promise(resolve => setTimeout(resolve, 1000));
                     }
                 }
@@ -126,7 +126,6 @@
     function startScript() {
         if (!isRunning) {
             isRunning = true;
-            showMessage("Script triggered: Deleting messages from Joshua Lawrence (EXT).");
             deleteMessages();
         } else {
             showMessage("Script already running.");
