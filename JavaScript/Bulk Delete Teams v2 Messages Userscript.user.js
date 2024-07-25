@@ -20,7 +20,6 @@
     let isRunning = false;
     let deleteKeyTimer;
     let deleteKeyHoldTime = 5000;
-    let foundMessage = false;
     let totalWipedMessages = 0;
     let deletedMessages = 0;
     let oldWindowTitle = document.title;
@@ -64,21 +63,8 @@
             })
             .reverse();
             if (messages.length === 0) {
-                if (foundMessage) {
-                    showMessage("No messages, waiting 15 seconds before scrolling due to Microsoft rate limiting.");
-                    await new Promise(resolve => setTimeout(resolve, 1000));
-                    for(let i = 15; i>0;i--) {
-                        showMessage(`Waiting ${i} more second(s) before scrolling`);
-                        document.title = "Waiting ${i} Second(s)"
-                        await new Promise(resolve => setTimeout(resolve, 1000));
-                    }
-                    document.title = `Teams | Cleaned ${totalWipedMessages} Messages`
-                    showMessage(`Continuing`);
-                } else {
-                    showMessage("Looking for messages..");
-                    await new Promise(resolve => setTimeout(resolve, 1000));
-                }
-                foundMessage = false;
+                showMessage("Looking for messages..");
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 let topmostMessage = document.querySelector('div[data-tid="chat-pane-item"]');
                 if (topmostMessage) {
                     topmostMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -115,7 +101,6 @@
                         deleteOption.click();
                         totalWipedMessages++;
                         deletedMessages++;
-                        foundMessage = true
                         showMessage(`Deleted ${totalWipedMessages} total message(s).`);
                         document.title = `Teams | Cleaned ${totalWipedMessages} Messages`
                         await new Promise(resolve => setTimeout(resolve, 300));
