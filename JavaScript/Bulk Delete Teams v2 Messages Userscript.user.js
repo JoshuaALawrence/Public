@@ -22,7 +22,7 @@
     let deleteKeyHoldTime = 5000; // 5 seconds
     let scrollTimeout = 120000; // 60 seconds
     let scrollTimer;
-    let firstLoad = false;
+    let firstLoad = true;
 
     function triggerRightClick(element) {
         let event = new MouseEvent('contextmenu', {
