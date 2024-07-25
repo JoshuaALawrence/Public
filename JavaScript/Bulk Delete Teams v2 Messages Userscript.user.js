@@ -21,6 +21,7 @@
     let deleteKeyTimer;
     let deleteKeyHoldTime = 5000;
     let foundMessage = false;
+    let totalWipedMessages = 0;
     let deletedMessages = 0;
 
     function triggerRightClick(element) {
@@ -107,8 +108,10 @@
                     let deleteOption = document.querySelector('div[role="menuitem"][aria-label="Delete this message"]');
                     if (deleteOption) {
                         deleteOption.click();
+                        totalWipedMessages++;
                         deletedMessages++;
                         foundMessage = true
+                        showMessage(`Deleted ${totalWipedMessages} total messages.`);
                         await new Promise(resolve => setTimeout(resolve, 300));
                     } else {
                         console.error("Delete option not found.");
